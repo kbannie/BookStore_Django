@@ -1,5 +1,5 @@
 ## 📚BookStore 만들기
-###💻 Django + Bootstrap을 사용한 BookStroe 웹 개발
+### : 💻 Django + Bootstrap을 사용한 BookStroe 웹 개발
 
 #### : 서양 미술 책 판매 온라인 서점
 
