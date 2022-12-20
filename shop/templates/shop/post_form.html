@@ -1,0 +1,52 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+Create Post - Shop
+{% endblock %}
+
+{% block main_area %}
+<br>
+
+<h1>Craet New Post</h1>
+<hr>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form | crispy}}
+    <div id="div_id_tags_str">
+        <label for="id_tags">Tags:</label>
+        <input type="text" id="id_tags" name="tags_str"
+               class="textinput textInput form-control">
+    </div>
+    <br>
+    <br>
+
+    <button type="submit" class="btn float-right" style="background-color: #FFAC45; border-color:#FFAC45; color:white">
+        Submit
+    </button>
+
+</form>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}
+
+
+
+
+
+
+

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Modern Business - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'shop/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen"></link>
+    <script src="https://kit.fontawesome.com/87c08dff42.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+{% include 'shop/navbar.html' %}
+
+<!-- Header-->
+<header class="masthead text-center text-white">
+    <div class="masthead-content">
+        <div class="container px-1">
+            <img class="img-fluid" src="{% static 'shop/images/5.PNG' %}">
+        </div>
+    </div>
+    <div class="bg-circle-1 bg-circle"></div>
+    <div class="bg-circle-2 bg-circle"></div>
+    <div class="bg-circle-3 bg-circle"></div>
+    <div class="bg-circle-4 bg-circle"></div>
+</header>
+
+<br>
+<br>
+<section class="margin-for-footer">
+    <div class="container">
+        <div class="row">
+            <div class="float-center">
+                <h1>About WWA</h1>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-6">
+                <div class="card" data-toggle="modal" data-target="#portfolio2">
+                    <div class="card-body">
+                        <h5>10년간의 성장</h5>
+                        <div class="card-img-top" id="mychart1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="card" data-toggle="modal" data-target="#portfolio4">
+                    <img class="card-img-top" src="{% static 'shop/images/books.jpg' %}">
+                    <div class="card-body">
+                        <h5>카테고리 별 판매권수</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content section 1-->
+<section id="scroll">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'shop/images/1.PNG' %}"
+                                      alt="..."/></div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h1>시대별 구분</h1>
+                    <p class="lead"> {{post.content}}서양 미술과 관련된 책을 시대별로 카테고리 지어 구분했습니다. 원시, 고대, 중세, 르네상스, 바로크, 로코코, 현대 등
+                        시대별로 책을 찾을 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Content section 2-->
+<section>
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'shop/images/2.PNG' %}"
+                                      alt="..."/></div>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <h1>나라별 구분</h1>
+                    <p class="lead"> 책의 주제와 관련된 나라들을 태그로 달았습니다. 해당 책이 어떤 나라와 연관되어 있는지 파악할 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+		google.charts.load('current',{'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawChart2);
+
+		function drawChart2(){
+			var data=google.visualization.arrayToDataTable([
+				['Year', '판매권수'],
+				['2012', 1000],
+				['2015', 2000],
+				['2018', 5000],
+				['2022', 10000]
+			]);
+			var options={
+				chart: {
+					title: 'Company Performance',
+					subtitle : '판매권수 : 2012-2022',
+				}
+			};
+
+			var chart=new google.visualization.PieChart(document.getElementById('mychart2'));
+			chart.draw(data,options);
+		};
+
+
+
+
+
+
+
+				google.charts.load('current',{'packages':['line']});  //bar
+		google.charts.setOnLoadCallback(drawChart);
+
+		function drawChart(){
+			var data=google.visualization.arrayToDataTable([
+				['Year', '판매권수', '성장률', '수입비(만원)'],
+				['2012', 1000, 500, 2000],
+				['2015', 2000, 800, 4000],
+				['2018', 5000, 1500, 7000],
+				['2-22', 10000, 3000, 14000]
+			]);
+			var options={
+				chart: {
+					title: 'Company Performance',
+					subtitle : 'Sales, Expenses, Profit : 2012-2022',
+				}
+			};
+
+			var chart=new google.charts.Line(document.getElementById('mychart1'));
+			chart.draw(data,google.charts.Line.convertOptions(options));
+
+
+
+
+		};
+
+		google.charts.load('current',{'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawChart2);
+
+		function drawChart2(){
+			var data=google.visualization.arrayToDataTable([
+				['카테고리', '판매권수'],
+				['중세', 3],
+				['르네상스', 4],
+				['고대', 2],
+				['전체', 1],
+				['현대', 6],
+				['근대', 4]
+			]);
+			var options={
+				chart: {
+					title: '카테고리 별 판매권수',
+					subtitle : '판매권수 : 2012-2022',
+				}
+			};
+
+			var chart=new google.visualization.PieChart(document.getElementById('mychart4'));
+			chart.draw(data,options);
+		};
+
+
+
+
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="portfolio2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">10년간의 성장</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Year</th>
+                                <th scope="col">판매권수</th>
+                                <th scope="col">성장률</th>
+                                <th scope="col">수입비(만원)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">2012</th>
+                                <td>1000</td>
+                                <td>500</td>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2015</th>
+                                <td>2000</td>
+                                <td>800</td>
+                                <td>4000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2018</th>
+                                <td>5000</td>
+                                <td>1500</td>
+                                <td>7000</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2022</th>
+                                <td>10000</td>
+                                <td>3000</td>
+                                <td>14000</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="portfolio4" tabindex="-1" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel4">카테고리 별 판매권수</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="card-img-top" id="mychart4"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>
+
+{% include 'shop/footer.html' %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+
+

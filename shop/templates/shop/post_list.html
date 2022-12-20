@@ -1,0 +1,175 @@
+{% extends 'shop/base.html' %} <!--다른 파일 불러와서 복사하기-->
+{% block main_area %}
+<body class="d-flex flex-column">
+<br>
+
+{% if user.is_authenticated %}
+{% if user.is_superuser or user.is_staff %}
+<a href="/shop/create_post/" role="button" style="background-color: #FFAC45; border-color:#FFAC45;"
+   class="btn btn-info btn-sm float-right">
+    <i class="fas fa-pen"></i> New Post
+</a>
+{% endif %}
+{% endif %}
+
+<br>
+<br>
+<!-- 카테고리,출판사 -->
+<!--<div class="row">-->
+<!--    <div class="col-sm-6">-->
+<!--        <div class="card">-->
+<!--            <div class="card-header">카테고리</div>-->
+<!--            <div class="card-body">-->
+<!--                <div class="row">-->
+<!--                    <ul class="list-unstyled mb-0">-->
+<!--                        <li><a href="/shop/category/중세">중세 (3)</a></li>-->
+<!--                        <li><a href="/shop/category/르네상스">르네상스 (4)</a></li>-->
+<!--                        <li><a href="/shop/category/고대">고대 (2)</a></li>-->
+<!--                        <li><a href="/shop/category/전체">전체 (1)</a></li>-->
+<!--                        <li><a href="/shop/category/현대">현대 (6)</a></li>-->
+<!--                        <li><a href="/shop/category/근대">근대 (4)</a></li>-->
+<!--                        <li><a href="/shop/company/no_company">미분류 (0)</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="col-sm-6">-->
+<!--        <div class="card">-->
+<!--            <div class="card-header">출판사</div>-->
+<!--            <div class="card-body">-->
+<!--                <div class="row">-->
+<!--                    <ul class="list-unstyled mb-0">-->
+<!--                        <li><a href="/shop/company/한경arte">한경 (2)</a> 서울 중구 청파로 463 한국경제 6층 | 232779900</li>-->
+<!--                        <li><a href="/shop/company/더숲">더숲 (1)</a> 서울시 마포구 동교로 43-1, 서울 | 231418301</li>-->
+<!--                        <li><a href="/shop/company/예경">예경 (3)</a> 서울특별시 종로구 평창동 296-2 | 23963040</li>-->
+<!--                        <li><a href="/shop/company/책과함께">책과함께 (1)</a> 서울특별시 마포구 서교동 395-178 | 23351982</li>-->
+<!--                        <li><a href="/shop/company/마로니에북스">마로니에북스 (2)</a> 서울특별시 종로구 동숭동 1-81 | 27449191</li>-->
+<!--                        <li><a href="/shop/company/동문선">동문선 (1)</a> 서울특별시 종로구 관훈동 37 | 27372795</li>-->
+<!--                        <li><a href="/shop/company/이성원">이성원 (1)</a> 경기도 성남 | 2973813</li>-->
+<!--                        <li><a href="/shop/company/책우리">책우리 (1)</a> 서울특별시 서대문구 충정로3가 1-38 | 23135047</li>-->
+<!--                        <li><a href="/shop/company/큐리어스">큐리어스 (1)</a> 서울특별시 성북구 정릉로21길 65 | 1032317694</li>-->
+<!--                        <li><a href="/shop/company/제이엔제이제이">제이엔제이제이 (1)</a> 서울특별시 중구 초동 | 222774402</li>-->
+<!--                        <li><a href="/shop/company/아트북스">아트북스 (1)</a> 경기 파주시 산남동 42-8 | 319557977</li>-->
+<!--                        <li><a href="/shop/company/휴머니스트">휴머니스트 (1)</a> 서울특별시 마포구 연남동 동교로23길 76 | 23354422</li>-->
+<!--                        <li><a href="/shop/company/생각의 나무">생각의 나무 (2)</a> 서울특별시 마포구 연남동 566-11 | 231411616</li>-->
+<!--                        <li><a href="/shop/company/미술문화">미술문화 (1)</a> 서울특별시 마포구 합정동 204-3 | 23552964</li>-->
+<!--                        <li><a href="/shop/company/창지사">창지사 (1)</a> 서울특별시 금천구 가산동 345-13 | 27192211</li>-->
+<!--                        <li><a href="/shop/company/no_company">미분류 (0)</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<main class="flex-shrink-0">
+    <br>
+
+
+    <!-- Blog preview section-->
+    <section class="py-5">
+
+        <div class="container px-5">
+            {% if category %}
+            <h2>Books- <span class="badge badge-secondary">{{category}}  ({{category.post_set.all.count}})</span></h2>
+            {% endif %}
+            {% if company %}
+            <h2>Books- <span class="badge badge-warning">{{company}}  ({{company.post_set.all.count}})</span></h2>
+            {% endif %}
+
+            {% if tag %}
+            <h2>Books- <span class="badge badge-success">{{tag}} ({{tag.post_set.all.count}})</span></h2>
+            {% endif %}
+
+            {% if search_info %}
+            <h2>Books- <span class="badge badge-success">{{search_info}}</span></h2>
+            {% endif %}
+
+            <div class="row gx-5">
+                {% for p in post_list.all %}
+                <div class="col-lg-4 mb-5">
+                    <div class="card h-100 shadow border-0">
+                        {% if p.head_image %}  <!--이미지를 업로드 했을 때-->
+                        <img class="card-img-top" src="{{p.head_image.url}}" alt="{{p.title}}의 head_image"/>
+                        {% else %}  <!--이미지를 업로드하지 않았을 때-->
+                        <img class="card-img-top" src="https://picsum.photos/seed/{{p.pk}}700/500" alt="random image"/>
+                        <!--/seed/{{p.pk}} : pk값에 따라 고유한 이미지 부여-->
+                        <!--/800/200 : 가로/세로 지정    -->
+                        {% endif %}
+                        <div class="card-body p-4">
+                            <div class="text-center">
+
+                                <!-- Product name-->
+                                {% if p.category %}
+                                <span class="badge badge-warning float-left"> <a href="{{p.category.get_absolute_url}}">{{p.category}}</a></span>
+                                {% else %}
+                                <span class="badge badge-warning float-left"><a
+                                        href="/shop/category/no_category/">미분류</a></span>
+                                {% endif %}
+                                <br>
+                                <h5 class="fw-bolder"><a href="{{p.get_absolute_url}}">{{p.title}}</a></h5>
+
+                                <br>
+                                <!-- Product price-->
+                                <h4>{{p.price}}원</h4>
+                                <br>
+                                <p class="card-text">{{p.content | truncatechars:30}}</p>
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                            {% if p.tags.exists %}
+                            <i class="fas fa-tag"></i>
+                            {% for t in p.tags.iterator %}
+                            <span class="badge badge-pill badge-light">
+                                                <a href="{{t.get_absolute_url}}">{{t}}</a>
+                                            </span>
+                            {% endfor %}
+                            <br>
+                            <br>
+                            {% endif %}
+                            <div>
+                                {% if p.author %}
+                                <h6><a href="{{p.author.get_absolute_url}}">저자 : {{p.author}}</a></h6>
+                                {% else %}
+                                <h6><a href="/shop/author/no_author/">저자X</a></h6>
+                                {% endif %}
+                                {% if p.category %}
+                                <h6><a href="{{p.company.get_absolute_url}}">출판사 : {{p.company}}</a></h6>
+                                {% else %}
+                                <h6><a href="/shop/company/no_company/">미출판사</a></h6>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Pagination-->
+{% if is_paginated %}
+<nav aria-label="Pagination">
+    <hr class="my-0"/>
+    <ul class="pagination justify-content-center my-4">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}" tabindex="-1"
+                                 aria-disabled="true">Newer</a></li>
+        {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Before</a></li>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">After</a></li>
+        {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#!">After</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+</div>
+
+</body>
+{% endblock %}

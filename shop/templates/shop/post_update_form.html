@@ -1,0 +1,39 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+Update Post - Shop
+{% endblock %}
+
+{% block main_area %}
+<h1>Update Post</h1>
+<hr>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form | crispy}}
+    <div id="div_id_tags_str">
+        <label for="id_tags">Tags:</label>
+        <input type="text" id="id_tags" name="tags_str" value="{{tage_str_default}}"
+               class="textinput textInput form-control">
+    </div>
+    <br>
+    <br>
+    <button type="submit" class="btn float-right" style="background-color: #FFAC45; border-color:#FFAC45; color:white">
+        Submit
+    </button>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+</form>
+{% endblock %}
